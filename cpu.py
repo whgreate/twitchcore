@@ -1,3 +1,4 @@
+# 中文注释版 ^_^
 #!/usr/bin/env python3
 import os
 import struct
@@ -11,12 +12,14 @@ regnames = \
   ['s%d'%i for i in range(2,12)] +\
   ['t%d'%i for i in range(3,7)] + ["PC"]
 
+# 通用寄存器组，RISC-V标准中共33个
 class Regfile:
   def __init__(self):
     self.regs = [0]*33
   def __getitem__(self, key):
     return self.regs[key]
   def __setitem__(self, key, value):
+    # 第一个寄存器中的值永远为0，不能设置
     if key == 0:
       return
     self.regs[key] = value & 0xFFFFFFFF
